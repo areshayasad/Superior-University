@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA APOD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2rem;
+        }
+        img {
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+        p {
+            max-width: 80%;
+            margin: 20px auto;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1>NASA Astronomy Picture of the Day</h1>
+    <h2>{{ apod.title }}</h2>
+    <img src="{{ apod.url }}" alt="Astronomy Picture of the Day">
+    <p>{{ apod.explanation }}</p>
+    <p class="footer">© NASA | {{ apod.date }}</p>
+</body>
+</html>
