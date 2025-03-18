@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Profiler</title>
+</head>
+<body>
+    <h2>Upload an Image for Personality Analysis</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if image_url %}
+        <h3>Uploaded Image:</h3>
+        <img src="{{ image_url }}" alt="Uploaded Image" width="300">
+        
+        <h3>Processed Image:</h3>
+        <img src="{{ processed_url }}" alt="Processed Image" width="300">
+
+        <h3>Facial Features:</h3>
+        <ul>
+            {% for key, value in features.items() %}
+                <li><strong>{{ key.replace('_', ' ').title() }}</strong>: {{ value }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Personality Traits:</h3>
+        <ul>
+            {% for key, value in personality.items() %}
+                <li><strong>{{ key.replace('_', ' ').title() }}</strong>: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Profiling System</title>
+</head>
+<body>
+    <h1>Simple Face Profiling System</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if image_url %}
+        <h2>Processed Image</h2>
+        <img src="{{ image_url }}" alt="Processed Face Image" width="300">
+        <h2>Face Features</h2>
+        <ul>
+            {% for key, value in features.items() %}
+                <li><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Personality Analysis</h2>
+        <ul>
+            {% for key, value in personality.items() %}
+                <li><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html> {% endcomment %}
