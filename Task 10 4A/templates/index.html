@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 40px; }
+        .chatbox { width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #aaa; }
+        .messages { height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+        .input-area { display: flex; }
+        .input-area input { flex: 1; padding: 10px; }
+        .input-area button { padding: 10px; }
+        .user { text-align: right; margin-bottom: 10px; }
+        .bot { text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="chatbox">
+        <h2>Library Chatbot</h2>
+        <div class="messages" id="chatbox"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask me something..." autocomplete="off">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let userMsg = document.getElementById('userInput').value;
+            if (!userMsg) return;
+
+            let chatbox = document.getElementById('chatbox');
+            chatbox.innerHTML += `<div class='user'><strong>You:</strong> ${userMsg}</div>`;
+            document.getElementById('userInput').value = '';
+
+            fetch('/get', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'msg=' + encodeURIComponent(userMsg)
+            })
+            .then(res => res.json())
+            .then(data => {
+                chatbox.innerHTML += `<div class='bot'><strong>Bot:</strong> ${data.response}</div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
